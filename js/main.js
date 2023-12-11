@@ -3,42 +3,63 @@ const articulo = function (nombre,precio){
     this.precio = precio
 }
 
-let articulo1 = new articulo ("cloro", 200)
-let articulo2 = new articulo ("lavandina", 300)
-let articulo3 = new articulo ("jabon liquido", 350)
-let articulo4 = new articulo ("perfumina para piso", 150)
+let articulo1 = new articulo ("Cloro", 250)
+let articulo2 = new articulo ("Lavandina", 210)
+let articulo3 = new articulo ("Jabon liquido", 400)
+let articulo4 = new articulo ("Perfumina para piso", 230)
 
 let articulos = [articulo1,articulo2,articulo3,articulo4]
 
+let lista = document.getElementById("miSelect");
+let boton = document.getElementById("agregarCarrito")
+let cantidad = document.getElementById("cantidad")
+let resultado = document.getElementById("resultado")
+let listaCompras = document.getElementById ("listaCompras")
+let botonComprar = document.getElementById ("btnComprar")
 
-function bienvenido() {
-    let producto = parseInt(prompt("¡Bienvenido! Seleccione un producto ingresando un numero entre 1 y 4" + "\n" + "\n1. Cloro" + "\n2. Lavandina" + "\n3. Jabon liquido" + "\n4. Perfumina"))
-
-    if (!Number.isInteger(producto)) {
-        alert("El valor ingresado no es un numero")
-    }else{
-        if ((producto < 1) || (producto > 4)) {
-            alert("Por favor, ingresar un numero entre 1 y 4.")
-            bienvenido()
-        } else {
-            for (let i= 0; i < articulos.length; i++) {
-                if (producto == i+1) {
-                    calcular(articulos[i])
-                    break;
-                }
-            }
-        }
-    }
-}
-function calcular(articulo){    
-    let cantidad = parseInt(prompt("Ingrese cuantos litros de " + articulo.nombre + " desea comprar"))
-    if (!Number.isInteger(cantidad)) {
-        alert("El valor ingresado no es un numero")
-        calcular(articulo)
-    }else{
-        let resultado = cantidad * articulo.precio
-        alert ("Estas comprando " + cantidad + "L de " + articulo.nombre + "\nEl valor de su compra es " + "$" + resultado)
-    }
+window.onload = function () {
+    botonComprar.style.display = 'none'
 }
 
-bienvenido()
+function cargandoSelect() {    
+    articulos.forEach(function (articulo) {        
+        lista.innerHTML += `<option value="${articulo.precio}">${articulo.nombre}</option>`;        
+    })    
+}
+
+cargandoSelect()
+
+let carrito = []
+let acum = 0
+
+boton.addEventListener("click", function () {
+    
+    let inputCantidad = document.getElementById("cantidad")
+    let art = lista.options[lista.selectedIndex].text
+    let valor = lista.options[lista.selectedIndex].value
+    let calculo = valor * inputCantidad.value
+    acum = acum + calculo
+
+    const compra = {
+        nombre: art,
+        precio: valor,
+        cantidad: inputCantidad.value,
+        total: calculo
+    }
+    carrito.push(compra)
+
+    listaCompras.innerHTML += `<li>Articulo: ${compra.nombre}, Precio: ${compra.precio}, Cantidad: ${compra.cantidad}, Importe: ${compra.total}</li>`
+    resultado.innerHTML = ""
+    resultado.innerHTML += `PRECIO TOTAL: ${acum}`
+    botonComprar.style.display = 'flex'
+
+
+
+    carrito.forEach(function (lacompra) {
+        console.log (lacompra.nombre)
+        console.log (lacompra.precio)
+        console.log (lacompra.cantidad)
+        console.log (lacompra.total)
+    });   
+
+})

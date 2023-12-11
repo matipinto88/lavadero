@@ -4,9 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lavadero</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
+    <h1>¡Bienvenido!</h1>
+    <h2>Arma tu pedido</h2>
+    <div class="contenedor">
+        <div><b>Articulos</b>
+            <ul>
+                <li>Cloro</li>
+                <li>Lavandina</li>
+                <li>Jabon liquido</li>
+                <li>Perfumina para piso</li>
+            </ul>
+        </div>
+        <div><b>Precio por litro</b>
+            <ul>
+                <li>$250</li>
+                <li>$210</li>
+                <li>$400</li>
+                <li>$230</li>
+            </ul>
+        </div>
+    </div>
     
+    <div>
+        <label for="miSelect">Seleccione el articulo</label>
+        <select name="miSelect" id="miSelect"></select>
+        <br>
+        <label for="cantidad">Ingrese cantidad</label>
+        <input type="number" id="cantidad" placeholder="Ingresa cantidad"><br>
+        <button id="agregarCarrito">Agregar</button>
+    </div>
+    
+    <div>
+        <ul id="listaCompras"></ul>
+        <label id="resultado"></label>
+        <button class="btnComprar" id="btnComprar">Comprar</button>
+    </div>
+    <br>
+    <div>
+        <label for="ValorTareas">Ingrese valores</label>
+    
+        <input type="text" id="ValorTareas" placeholder="Ingresa valores">
+        <button id="agregarLista">Botonsito</button>
+    
+        
+    
+    
+        <h2>Buscador</h2>
+    
+        <label for="BuscadorTareas">Ingrese valores</label>
+        <input type="text" id="BuscadorTareas" placeholder="Ingresar Buscador Tarea">
+    
+        <div id="resultado2"></div>
+    </div>
+
     <script src="js/main.js"> </script>
 </body>
 </html>
