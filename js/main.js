@@ -26,11 +26,20 @@ function cargandoSelect() {
         lista.innerHTML += `<option value="${articulo.precio}">${articulo.nombre}</option>`;        
     })    
 }
+function inicializar(){
+    carrito = []
+    acum = 0
+    botonComprar.style.display = 'none'
+    listaCompras.innerHTML = ""
+    resultado.innerHTML = ""
+    cantidad.value = ""    
+}
 
 cargandoSelect()
 
 let carrito = []
 let acum = 0
+
 
 boton.addEventListener("click", function () {
     
@@ -53,13 +62,33 @@ boton.addEventListener("click", function () {
     resultado.innerHTML += `PRECIO TOTAL: ${acum}`
     botonComprar.style.display = 'flex'
 
-
-
-    carrito.forEach(function (lacompra) {
-        console.log (lacompra.nombre)
-        console.log (lacompra.precio)
-        console.log (lacompra.cantidad)
-        console.log (lacompra.total)
-    });   
-
 })
+botonComprar.addEventListener("click", function () {
+    localStorage.setItem("compraGuardada", JSON.stringify(carrito));
+    alert ("¡Compra realizada con exito!")
+    inicializar()
+})
+
+let ultimaCompra = [];
+let btnMostrar = document.getElementById ("mostrar")
+let mostrarLista = document.getElementById ("mostrarLista") //este es el ul
+
+btnMostrar.addEventListener("click", function () {
+    let valorGuardado = localStorage.getItem("compraGuardada");
+    if (valorGuardado) {
+        ultimaCompra = JSON.parse(valorGuardado);
+        recorrerLista();
+    }
+    
+})
+
+function recorrerLista() {
+    mostrarLista.innerHTML = "";
+    if (ultimaCompra.length > 0) {
+        
+        ultimaCompra.forEach(function (compra) {
+            mostrarLista.innerHTML += `<li>Articulo: ${compra.nombre}, Precio: ${compra.precio}, Cantidad: ${compra.cantidad}, Importe: ${compra.total}</li>`
+        });
+        
+    }
+}
