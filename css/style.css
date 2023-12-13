@@ -3,7 +3,7 @@
     z-index: 100;
     
 }
-ul {
+li, ul {
     list-style: none;
     padding-right: 10px;    
     padding-inline-start: 0;
